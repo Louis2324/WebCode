@@ -25,7 +25,7 @@ html, body {
 
 body {
   font-family: system-ui, sans-serif;
-  background: linear-gradient(180deg, var(--body-bg) 5%, var(--bg) 35%);
+  background: var(--body-bg);
   color: var(--txt);
   line-height: 1.5;
 }
