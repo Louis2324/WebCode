@@ -248,3 +248,11 @@ ul {
     list-style: decimal;
     padding: 10px;
 }
+
+a,a:visited {
+  color: var(--muted);
+}
+
+a:hover {
+  color: var(--txt);
+}
