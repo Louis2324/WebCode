@@ -1,3 +1,4 @@
+import { load } from "ace-builds/src-noconflict/ext-emmet";
 import ace from "./node_modules/ace-builds";
 
 const sel = s => document.querySelector(s);
@@ -221,3 +222,29 @@ function saveProject() {
 }
 
 sel("#saveBtn")?.addEventListener("click",()=> saveProject());
+sel("#loadBtn")?.addEventListener("click",()=> sel("#openFile").click() );
+sel("#openFile")?.addEventListener("change", async (e)=>{
+    const f = e.target.files[0];
+    if(!f) return;
+
+    try {
+        const obj = JSON.parse(await f.text());
+        loadProject(obj);
+    } catch (e) {
+        log("Invalid Project File" + e, "error");
+    }
+});
+
+
+try {
+    const cache = localStorage.getItem(STORAGE_KEY);
+    if(cache) {
+        loadProject(JSON.parse(cache));
+    }else {
+        setDefaultContent();
+    }
+}catch {
+    setDefaultContent();
+}
+
+log("Welcome to web code your editor for web technologies");
