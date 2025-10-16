@@ -1,4 +1,4 @@
-{
+{ 
   "name": "Web Code",
   "version": "1.0.0",
   "description": "A code editor made specifically for web development",
@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/Louis2324/WebCode/issues"
   },
-  "homepage": "https://github.com/Louis2324/WebCode#readme"
+  "homepage": "https://github.com/Louis2324/WebCode#readme",
+  "dependencies": {
+    "ace-builds": "^1.43.3"
+  }
 }
