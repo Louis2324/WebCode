@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebCode</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header>
+    <div class="container row">
+      <div class="brand">
+        <div class="logo"></div>
+        <div class="title">WebCode: Your in-browser web-development kit</div>
+      </div>
+      <div class="row">
+        <button class="btn secondary" id="saveBtn" title="Save Work Locally">
+          <span>Save</span>
+        </button>
+        <button class="btn secondary" id="loadBtn" title="Load Work File">
+          <span>Load</span>
+        </button>
+        <input id="openFile" type="file" accept="application/json" hidden>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <aside class="card panel stack">
+      <h2>Task / Assignment</h2>
+      <textarea id="assignment" class="text" placeholder="Task Description..."></textarea>
+      <div class="stack">
+        <label for="testArea">Validation Tests (JavaScript Only)</label>
+        <textarea class="text" id="testArea" placeholder="Write simple tests to check your code"></textarea>
+      </div>
+      <div class="muted">
+        Tip: <span class="kbd">Ctrl</span> + <span class="kbd">S</span> to save,
+        <span class="kbd">Ctrl</span> + <span class="kbd">Enter</span> to run
+      </div>
+    </aside>
+
+    <section class="stack" id="web-only">
+      <div class="stack panel card" id="webEditors">
+        <div class="row">
+          <h2>HTML/CSS/JS</h2>
+          <div class="row">
+            <button class="btn ok" id="runWeb" aria-label="Run code in preview">Run</button>
+            <button class="btn secondary" id="openPreview" aria-label="Open preview in new window">
+              Open Preview
+            </button>
+          </div>
+        </div>
+
+        <div class="tabs" id="webTabs" role="tablist" aria-label="Web Editors">
+          <button class="tab active" role="tab" aria-selected="true" aria-controls="pane-html" id="tab-html" tabindex="0" data-pane="html">HTML</button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="pane-css" id="tab-css" tabindex="-1" data-pane="css">CSS</button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="pane-js" id="tab-js" tabindex="-1" data-pane="js">JS</button>
+        </div>
+
+        <div class="editor-wrap" id="pane-html" role="tabpanel" aria-labelledby="tab-html">
+          <div id="ed_html" class="editor"></div>
+        </div>
+        <div class="editor-wrap" id="pane-css" role="tabpanel" aria-labelledby="tab-css" hidden>
+          <div id="ed_css" class="editor"></div>
+        </div>
+        <div class="editor-wrap" id="pane-js" role="tabpanel" aria-labelledby="tab-js" hidden>
+          <div id="ed_js" class="editor"></div>
+        </div>
+
+        <div class="stack">
+          <h3>Preview</h3>
+          <iframe id="preview" sandbox="allow-scripts allow-modals" aria-label="Live preview"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <aside class="card panel stack">
+      <h2>Output</h2>
+      <div id="output" class="out" aria-live="polite"></div>
+      <div class="row">
+        <button class="btn warn" id="runTests" aria-label="Run tests">Run With Tests</button>
+        <button class="btn secondary" id="clearLog" aria-label="Clear output log">Clear Log</button>
+      </div>
+      <h3>Notes</h3>
+      <ul class="muted">
+        <li>Everything runs inside the browser</li>
+        <li>You can save your work as JSON</li>
+      </ul>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    &copy; 2025 
+    <a href="https://github.com/Louis2324" target="_blank" rel="noopener noreferrer">
+      Louis2324
+    </a> 
+    - All Rights Reserved
+  </footer>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.43.3/ace.js" integrity="sha512-T2otaV2NuxAJAOCoj8ijyy+eAAadZlpvdLmakrIGVFbBkthgIFqLTXd+T8Z+S+kf4V7Ib5+6f6r4D4IdS9Ey4A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+  <script src="./script.js" type="module"></script>
+</body>
+</html>
