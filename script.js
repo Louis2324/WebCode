@@ -1,5 +1,5 @@
-import { load } from "ace-builds/src-noconflict/ext-emmet";
-import ace from "./node_modules/ace-builds";
+// import { load } from "ace-builds/src-noconflict/ext-emmet";
+// import ace from "./node_modules/ace-builds";
 
 const sel = s => document.querySelector(s);
 const selAll = s => Array.from(document.querySelectorAll(s)); //converting from node list to regular javascript array;
@@ -10,7 +10,7 @@ const preview = sel("#preview");
 const STORAGE_KEY = "storagekey";
 const TAB_ORDER = ["html","css","js"];
 
-const escapeHTML = s => {
+const escapeHTML = s => (
     String(s)
     .replace(/[&<>"]/g,  c => ({
         '&':"&amp;",
@@ -19,7 +19,7 @@ const escapeHTML = s => {
         '"': "&quot;"
         })
     )
-}
+)
 
 function log(msg, type="info") {
     const color = type === "error"? "var(--error)":type==="warning"?"var(--warn)":"var(--brand)";
@@ -159,7 +159,8 @@ function buildWebSrcDoc( withTests = false) {
 
 function runWeb(withTests = false) {
     preview.srcdoc = buildWebSrcDoc(withTests);
-    log(withTests? "Run With Tests" : "Web Preview Updated");
+    const msg = withTests? "Run With Tests" : "Web Preview Updated";
+    log(msg);
 }
 
 sel("#runWeb")?.addEventListener('click', ()=> runWeb() );
