@@ -1,0 +1,258 @@
+:root {
+  --bg: #0f1221;
+  --body-bg: #0b0f1d;
+  --panel: #14182b;
+  --muted: #a1a8c2;
+  --txt: #e9ecf1;
+  --brand: #7dd3fc;
+  --brand-2: #60a5fa;
+  --ok: #22c55e;
+  --warn: #eab308;
+  --error: #ef4444;
+  --radius: 6px;
+  --gap: 15px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  background: var(--body-bg);
+  color: var(--txt);
+  line-height: 1.5;
+}
+
+header {
+  padding: 20px 0;
+  background: linear-gradient(90deg, rgba(96,165,250,0.04), rgba(135,209,243,0.06));
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.container {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 700;
+}
+
+.brand .logo {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius);
+  background: url("https://programming-ocean.com/code-editors/newlogo.png") center / cover no-repeat;
+}
+
+.title {
+  font-size: clamp(18px, 2vw, 22px);
+}
+
+main {
+  max-width: 1500px;
+  margin-inline: auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: minmax(250px, 1fr) 2fr minmax(300px, 1fr);
+  gap: var(--gap);
+}
+
+@media (max-width: 1100px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.08));
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.panel {
+  padding: 16px;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+h2, h3 {
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.btn {
+  appearance: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-weight: 700;
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  transition: all 0.2s ease;
+}
+
+.btn.primary {
+  background: linear-gradient(180deg, var(--brand), var(--brand-2));
+  color: #0b111f;
+}
+
+.btn.secondary {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--txt);
+}
+
+.btn.ok {
+  background: var(--ok);
+  color: #0b111f;
+}
+
+.btn.warn {
+  background: var(--warn);
+  color: #0b111f;
+}
+
+.btn:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.text {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--txt);
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  width: 100%;
+}
+
+textarea.text {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.tabs {
+  display: flex;
+  gap: var(--gap);
+  flex-wrap: wrap;
+}
+
+.tab {
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  background: rgba(255,255,255,0.05);
+  cursor: pointer;
+  font-weight: 600;
+  color: white;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.tab.active {
+  background: linear-gradient(180deg, rgba(125,212,252,0.1), rgba(96,214,250,0.1));
+  color: var(--ok);
+  border-color: rgba(255,255,255,0.2);
+}
+
+.tab:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+.editor-wrap {
+  position: relative;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background-color: #0b1020;
+}
+
+.editor {
+  width: 100%;
+  height: 300px;
+  font-family: monospace;
+  overflow: auto;
+}
+
+iframe#preview {
+  width: 100%;
+  height: 300px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius);
+  background-color: white;
+}
+
+.out {
+  background-color: #0a0e1a;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  min-height: 120px;
+  overflow: auto;
+  white-space: pre-wrap;
+  padding: 10px;
+}
+
+.footer {
+  opacity: 0.7;
+  font-size: 12px;
+  text-align: center;
+  padding: 15px;
+}
+
+.kbd {
+  font-family: ui-monospace;
+  background-color: #0e1324;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+
+label {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+ul {
+    list-style: decimal;
+    padding: 10px;
+}
+
+a,a:visited {
+  color: var(--muted);
+}
+
+a:hover {
+  color: var(--txt);
+}
