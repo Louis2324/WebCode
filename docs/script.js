@@ -30,6 +30,7 @@ function log(msg, type="info") {
 const clearOut = () => { out.innerHTML="";}
 sel("#clearLog")?.addEventListener("click",clearOut);
 
+ace.config.set("basePath","https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/ace.js");
 function makeEditor (id , mode) {
     const ed = ace.edit(id , {
         theme : "ace/theme/dracula",
