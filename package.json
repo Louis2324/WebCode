@@ -14,7 +14,7 @@
     "keywords": [],
     "author": "Louis2324",
     "license": "ISC",
-    "type": "commonjs",
+    "type": "module",
     "bugs": {
         "url": "https://github.com/Louis2324/WebCode/issues"
     },
@@ -24,6 +24,7 @@
     },
     "devDependencies": {
         "electron": "^38.4.0",
-        "electron-builder": "^26.0.12"
+        "electron-builder": "^26.0.12",
+        "nodemon": "^3.1.10"
     }
 }
