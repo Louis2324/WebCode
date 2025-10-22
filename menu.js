@@ -1,29 +1,13 @@
-import {shell} from "electron";
+import {shell , BrowserWindow} from "electron";
+const focusedWindow =  BrowserWindow.getFocusedWindow() || BrowserWindow.getAllWindows()[0];
 export const menuTemplate =  [
-    {
-        label: "File",
-        submenu: [
-            {
-                label:"Save",
-                accelerators:"CmdOrCtrl+S",
-                click: () => {
-                    window.webContents.send("menu-save");
-                }
-            },
-            {
-                label:"Load",
-                accelerators:"CmdOrCtrl+L",
-                click: () => {
-                    window.webContents.send("menu-load");
-                }
-            }
-        ]
-    },
+
     {
         label: "Help",
         submenu: [
             {
-                label: "View Documentation",
+                label: "Help",
+                accelerator: "CmdOrCtrl + H",
                 click: ()=> {
                     shell.openExternal("https://github.com/Louis2324/WebCode");
                 }
