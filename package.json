@@ -1,15 +1,29 @@
 {
-    "name":"Web Code",
-    "version":"1.0.0",
-    "description":"A code editor made specifically for web development",
-    "main":"main.js",
-    "scripts":{"test":"echo \"Error: no test specified\" && exit 1"},
-    "repository":{"type":"git","url":"git+https://github.com/Louis2324/WebCode.git"},
-    "keywords":[],
-    "author":"Louis2324",
-    "license":"ISC",
-    "type":"commonjs",
-    "bugs":{"url":"https://github.com/Louis2324/WebCode/issues"},
-    "homepage":"https://github.com/Louis2324/WebCode#readme",
-    "dependencies":{"ace-builds":"^1.43.3","electron":"^38.3.0"}
+    "name": "web-code",
+    "version": "1.0.0",
+    "description": "A code editor made specifically for web development",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron .",
+        "package": "electron-builder"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Louis2324/WebCode.git"
+    },
+    "keywords": [],
+    "author": "Louis2324",
+    "license": "ISC",
+    "type": "commonjs",
+    "bugs": {
+        "url": "https://github.com/Louis2324/WebCode/issues"
+    },
+    "homepage": "https://github.com/Louis2324/WebCode#readme",
+    "dependencies": {
+        "ace-builds": "^1.43.3"
+    },
+    "devDependencies": {
+        "electron": "^38.4.0",
+        "electron-builder": "^26.0.12"
+    }
 }
