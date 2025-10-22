@@ -1,6 +1,6 @@
 import { contextBridge , ipcRenderer } from "electron";
 
-contextBridge.exposeInMainWorld("electron-api" ,{
+contextBridge.exposeInMainWorld("electronApi" ,{
     onSave: (callback) => ipcRenderer.on("menu-save" , callback),
     onLoad: (callback) => ipcRenderer.on("menu-load" , callback)
 });
