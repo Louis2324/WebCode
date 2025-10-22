@@ -1,3 +1,5 @@
+
+
 const sel = s => document.querySelector(s);
 const selAll = s => Array.from(document.querySelectorAll(s)); //converting from node list to regular javascript array;
 
@@ -30,7 +32,7 @@ function log(msg, type="info") {
 const clearOut = () => { out.innerHTML="";}
 sel("#clearLog")?.addEventListener("click",clearOut);
 
-ace.config.set("basePath","https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/ace.js");
+ace.config.set("basePath","./vendor/ace");
 function makeEditor (id , mode) {
     const ed = ace.edit(id , {
         theme : "ace/theme/dracula",
