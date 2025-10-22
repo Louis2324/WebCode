@@ -1,5 +1,6 @@
 const sel = s => document.querySelector(s);
 const selAll = s => Array.from(document.querySelectorAll(s)); //converting from node list to regular javascript array;
+const ace = window.ace;
 
 const out = sel("#output");
 const preview = sel("#preview");
@@ -248,7 +249,6 @@ try {
 
 log("Welcome to web code your editor for web technologies");
 
-// script.js
 window.electronAPI.onSave(() => {
   sel("#saveBtn").click();
 });
