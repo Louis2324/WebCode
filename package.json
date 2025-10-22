@@ -4,6 +4,7 @@
     "description": "A code editor made specifically for web development",
     "main": "main.js",
     "scripts": {
+        "dev":"nodemon --exec \"npx electron . \" --ext js,html,css",
         "start": "electron .",
         "package": "electron-builder"
     },
