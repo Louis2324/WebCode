@@ -1,5 +1,6 @@
 {
     "name": "web-code",
+    "productName": "Web Code",
     "version": "1.0.0",
     "description": "A code editor made specifically for web development",
     "main": "main.js",
@@ -27,5 +28,33 @@
         "electron": "^38.4.0",
         "electron-builder": "^26.0.12",
         "nodemon": "^3.1.10"
+    },
+    "build" : {
+        "appId" :"com.webcode.app",
+        "productName":"WebCode",
+        "directories": {
+            "output": "release",
+            "buildResources": "assets"
+        },
+        "files" : [
+            "dist/**/*",
+            "main.js",
+            "menu.js",
+            "preload.js",
+            "package.json"
+        ],   
+        "asar" : true,
+        "win": {
+            "target": "nsis",
+            "icon": "assets/newlogo.ico"
+        },
+        "mac": {
+            "target": "dmg",
+            "icon": "assets/newlogo.icns"
+        },
+        "linux": {
+            "target": ["AppImage", "deb"],
+            "icon": "assets/newlogo.png"
+        }
     }
 }
