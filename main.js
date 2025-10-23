@@ -1,4 +1,4 @@
-import {BrowserWindow , app , Menu } from 'electron';
+import {BrowserWindow , app , Menu ,ipcMain} from 'electron';
 import { menuTemplate } from './menu.js';
 import path from "path";
 import { fileURLToPath} from 'url';
@@ -33,4 +33,28 @@ app.on("window-all-closed" , ()=> {
 
 app.on("activate", () => {
     if(BrowserWindow.getAllWindows().length === 0) createWindow();
+});
+
+process.on("uncaughtException",(err)=>{
+  console.error("[Main], Uncaugth Exception: ",err);
+});
+
+process.on("unhandledRejection", (reason) =>{
+  console.error("[Main], Unhandled Rejection: ",reason);
+})
+
+ipcMain.on("open-preview" , (event,html) => {
+  const previewWin = new BrowserWindow({
+    width: 800,
+    height: 800,
+    title: "Web Code Preview",
+    icon: path.join(__dirname,"assets","newlogo.png"),
+    webPreferences : {
+      nodeIntegration:false,
+      contextIsolation:true,
+    }
+  });
+
+    previewWin.loadURL(`data:text/html;charset=utf-8,${encodeURIComponent(html)}`);
+    previewWin.webContents.openDevTools();
 });
