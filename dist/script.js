@@ -31,7 +31,11 @@ function log(msg, type="info") {
 const clearOut = () => { out.innerHTML="";}
 sel("#clearLog")?.addEventListener("click",clearOut);
 
-ace.config.set("basePath","./vendor/ace");
+ace.config.set('basePath',  './vendor/ace/');
+ace.config.set('modePath',  './vendor/ace/');
+ace.config.set('themePath', './vendor/ace/');
+ace.config.set('workerPath','./vendor/ace/');
+
 function makeEditor (id , mode) {
     const ed = ace.edit(id , {
         theme : "ace/theme/dracula",
@@ -166,10 +170,7 @@ sel("#runWeb")?.addEventListener('click', ()=> runWeb() );
 sel("#runTests")?.addEventListener('click',()=> runWeb(true) );
 sel("#openPreview")?.addEventListener('click',()=> {
     const src = buildWebSrcDoc();
-    const w = window.open("about:blank");
-    w.document.open();
-    w.document.write(src);
-    w.document.close();
+    window.electronAPI.openPreview(src);  
 });
 
 
