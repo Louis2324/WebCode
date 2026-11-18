@@ -1,13 +1,14 @@
 {
     "name": "web-code",
     "productName": "Web Code",
-    "version": "1.0.0",
+    "version": "1.0.2-rc.1",
     "description": "A code editor made specifically for web development",
     "main": "main.js",
     "scripts": {
         "dev":"nodemon --exec \"npx electron . \" --ext js,html,css",
         "start": "electron .",
-        "package": "electron-builder"
+        "package": "electron-builder",
+        "test": "node --test"
     },
     "repository": {
         "type": "git",

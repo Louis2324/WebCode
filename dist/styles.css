@@ -43,6 +43,8 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .brand {
@@ -63,18 +65,50 @@ header {
   font-size: clamp(18px, 2vw, 22px);
 }
 
+.status {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 12px;
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.status[data-state="saved"] {
+  color: var(--ok);
+}
+
+.status[data-state="dirty"],
+.status[data-state="running"] {
+  color: var(--warn);
+}
+
+.status[data-state="error"] {
+  color: var(--error);
+}
+
 main {
   max-width: 1500px;
   margin-inline: auto;
   padding: 20px;
   display: grid;
   grid-template-columns: minmax(250px, 1fr) 2fr minmax(300px, 1fr);
+  grid-template-areas: "assignment workspace output";
   gap: var(--gap);
 }
+
+#assignmentPanel { grid-area: assignment; }
+#web-only { grid-area: workspace; min-width: 0; }
+#outputPanel { grid-area: output; }
 
 @media (max-width: 1100px) {
   main {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      "workspace"
+      "assignment"
+      "output";
   }
 }
 
@@ -150,6 +184,13 @@ h2, h3 {
   transform: translateY(-1px);
 }
 
+.btn:focus-visible,
+.tab:focus-visible,
+.text:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
 .text {
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.1);
@@ -157,6 +198,11 @@ h2, h3 {
   padding: 10px 12px;
   border-radius: var(--radius);
   width: 100%;
+}
+
+.text:focus {
+  border-color: var(--brand-2);
+  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.18);
 }
 
 textarea.text {
@@ -201,14 +247,14 @@ textarea.text {
 
 .editor {
   width: 100%;
-  height: 300px;
+  height: 380px;
   font-family: monospace;
   overflow: auto;
 }
 
 iframe#preview {
   width: 100%;
-  height: 300px;
+  height: 320px;
   border: 1px solid rgba(255,255,255,0.12);
   border-radius: var(--radius);
   background-color: white;
@@ -218,11 +264,20 @@ iframe#preview {
   background-color: #0a0e1a;
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: var(--radius);
-  min-height: 120px;
+  min-height: 180px;
   overflow: auto;
   white-space: pre-wrap;
   padding: 10px;
 }
+
+.log-time {
+  margin-right: 4px;
+}
+
+.log-info { color: var(--brand); }
+.log-warning { color: var(--warn); }
+.log-error { color: var(--error); }
+.log-success { color: var(--ok); }
 
 .footer {
   opacity: 0.7;

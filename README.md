@@ -65,7 +65,7 @@ node --check main.js
 node --check preload.js
 node --check menu.js
 node --check dist/script.js
-npm run test --if-present
+npm test
 ```
 
 ## Automated builds and releases
