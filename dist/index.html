@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; frame-src 'self' data:; worker-src 'self' blob:; connect-src 'none'; object-src 'none'; base-uri 'none';">
   <title>WebCode</title>
   <link rel="stylesheet" href="./styles.css">
 </head>
@@ -13,7 +14,11 @@
         <div class="logo"></div>
         <div class="title">WebCode: Your in-browser web-development kit</div>
       </div>
+      <div class="status" id="status" role="status" aria-live="polite">Starting...</div>
       <div class="row">
+        <button class="btn secondary" id="newBtn" title="Create a new project">
+          <span>New</span>
+        </button>
         <button class="btn secondary" id="saveBtn" title="Save Work Locally">
           <span>Save</span>
         </button>
@@ -26,12 +31,12 @@
   </header>
 
   <main>
-    <aside class="card panel stack">
+    <aside class="card panel stack" id="assignmentPanel">
       <h2>Task / Assignment</h2>
       <textarea id="assignment" class="text" placeholder="Task Description..."></textarea>
       <div class="stack">
         <label for="testArea">Validation Tests (JavaScript Only)</label>
-        <textarea class="text" id="testArea" placeholder="Write simple tests to check your code"></textarea>
+      <textarea class="text" id="testArea" placeholder="Example: assert(document.querySelector('h1'), 'Add a heading')"></textarea>
       </div>
       <div class="muted">
         Tip: <span class="kbd">Ctrl</span> + <span class="kbd">S</span> to save,
@@ -60,7 +65,7 @@
         <div class="editor-wrap" id="pane-html" role="tabpanel" aria-labelledby="tab-html" data-pane="html">
           <div id="ed_html" class="editor"></div>
         </div>
-        <div class="editor-wrap" id="pane-css" role="tabpanel" aria-labelledby="tab-css" data-pane="css"hidden>
+        <div class="editor-wrap" id="pane-css" role="tabpanel" aria-labelledby="tab-css" data-pane="css" hidden>
           <div id="ed_css" class="editor"></div>
         </div>
         <div class="editor-wrap" id="pane-js" role="tabpanel" aria-labelledby="tab-js" data-pane="js" hidden>
@@ -74,9 +79,9 @@
       </div>
     </section>
 
-    <aside class="card panel stack">
+    <aside class="card panel stack" id="outputPanel">
       <h2>Output</h2>
-      <div id="output" class="out" aria-live="polite"></div>
+      <div id="output" class="out" role="log" aria-live="polite" aria-label="WebCode output"></div>
       <div class="row">
         <button class="btn warn" id="runTests" aria-label="Run tests">Run With Tests</button>
         <button class="btn secondary" id="clearLog" aria-label="Clear output log">Clear Log</button>
