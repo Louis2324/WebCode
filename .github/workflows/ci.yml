@@ -47,4 +47,4 @@ jobs:
 
       - name: Verify unpacked bundle
         shell: bash
-        run: test -f release/linux-unpacked/WebCode
+        run: test -f release/linux-unpacked/web-code
