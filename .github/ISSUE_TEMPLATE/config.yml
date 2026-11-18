@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/Louis2324/WebCode/security/advisories/new
+    about: Please report security vulnerabilities privately instead of opening a public issue.
+  - name: Documentation
+    url: https://github.com/Louis2324/WebCode#readme
+    about: Read the project documentation before opening a support issue.

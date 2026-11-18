@@ -1,0 +1,137 @@
+name: Release desktop installers
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: read
+
+env:
+  # Signing and notarization are intentionally disabled until repository secrets are configured.
+  CSC_IDENTITY_AUTO_DISCOVERY: false
+
+jobs:
+  check-version:
+    name: Check tag and package version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Verify version tag
+        shell: bash
+        run: |
+          tag_version="${GITHUB_REF_NAME#v}"
+          package_version="$(node --input-type=commonjs -e "const fs=require('fs'); process.stdout.write(JSON.parse(fs.readFileSync('package.json','utf8')).version)")"
+          if [ "$tag_version" != "$package_version" ]; then
+            echo "Tag version $tag_version does not match package.json version $package_version."
+            exit 1
+          fi
+
+  build:
+    name: Build ${{ matrix.name }}
+    needs: check-version
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Windows x64
+            slug: windows-x64
+            os: windows-latest
+            args: --win nsis --x64
+          - name: Windows ARM64
+            slug: windows-arm64
+            os: windows-latest
+            args: --win nsis --arm64
+          - name: macOS x64
+            slug: macos-x64
+            os: macos-latest
+            args: --mac dmg zip --x64
+          - name: macOS ARM64
+            slug: macos-arm64
+            os: macos-latest
+            args: --mac dmg zip --arm64
+          - name: Linux x64
+            slug: linux-x64
+            os: ubuntu-latest
+            args: --linux AppImage deb --x64
+          - name: Linux ARM64
+            slug: linux-arm64
+            os: ubuntu-latest
+            args: --linux AppImage deb --arm64
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build installer packages
+        run: npx electron-builder ${{ matrix.args }} --publish never
+
+      - name: Remove build metadata from release assets
+        shell: bash
+        run: rm -f release/builder-debug.yml release/builder-effective-config.yaml
+
+      - name: Normalize artifact names
+        shell: bash
+        run: |
+          for file in release/*; do
+            if [ -f "$file" ]; then
+              base="$(basename "$file")"
+              mv "$file" "release/WebCode-${{ matrix.slug }}-$base"
+            fi
+          done
+
+      - name: Upload platform artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: webcode-${{ matrix.slug }}
+          path: release/*
+          if-no-files-found: error
+          retention-days: 7
+
+  publish:
+    name: Publish GitHub Release
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download platform artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: webcode-*
+          path: release
+
+      - name: Flatten release artifacts
+        shell: bash
+        run: |
+          mkdir -p release-assets
+          find release -type f -exec cp {} release-assets/ \;
+          test -n "$(find release-assets -type f -print -quit)"
+
+      - name: Generate checksums
+        working-directory: release-assets
+        run: sha256sum * > SHA256SUMS.txt
+
+      - name: Publish release and assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" release-assets/* \
+            --repo "${GITHUB_REPOSITORY}" \
+            --title "WebCode ${GITHUB_REF_NAME}" \
+            --generate-notes \
+            --verify-tag
