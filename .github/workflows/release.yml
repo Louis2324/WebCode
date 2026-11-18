@@ -83,6 +83,11 @@ jobs:
         shell: bash
         run: rm -f release/builder-debug.yml release/builder-effective-config.yaml
 
+      - name: Remove unpacked application directories
+        shell: bash
+        run: |
+          find release -mindepth 1 -type d -prune -exec rm -rf {} +
+
       - name: Normalize artifact names
         shell: bash
         run: |
