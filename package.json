@@ -1,7 +1,7 @@
 {
     "name": "web-code",
     "productName": "Web Code",
-    "version": "1.0.2-rc.2",
+    "version": "1.0.2-rc.3",
     "description": "A code editor made specifically for web development",
     "main": "main.js",
     "scripts": {
