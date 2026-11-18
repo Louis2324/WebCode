@@ -30,7 +30,7 @@
     },
     "devDependencies": {
         "electron": "^38.4.0",
-        "electron-builder": "^26.0.12",
+        "electron-builder": "^26.18.0",
         "nodemon": "^3.1.10"
     },
     "build" : {
