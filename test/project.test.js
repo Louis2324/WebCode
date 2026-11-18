@@ -47,4 +47,3 @@ test("rejects invalid project versions and field types", () => {
     /Invalid WebCode project file/,
   );
 });
-

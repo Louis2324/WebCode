@@ -37,4 +37,3 @@ export function normalizeProject(value) {
     js: value.js,
   };
 }
-
