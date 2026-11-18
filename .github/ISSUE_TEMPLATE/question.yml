@@ -1,0 +1,22 @@
+name: Question or support
+description: Ask a question about using or developing WebCode.
+title: "[Question]: "
+labels:
+  - question
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: What would you like to know?
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      placeholder: 1.0.0
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Include relevant code, steps, or screenshots. Remove secrets first.
