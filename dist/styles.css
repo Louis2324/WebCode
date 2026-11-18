@@ -56,7 +56,7 @@ header {
   width: 36px;
   height: 36px;
   border-radius: var(--radius);
-  background: url("https://programming-ocean.com/code-editors/newlogo.png") center / cover no-repeat;
+  background: url("../assets/newlogo.png") center / cover no-repeat;
 }
 
 .title {

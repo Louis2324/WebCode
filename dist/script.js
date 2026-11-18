@@ -1,5 +1,6 @@
 const sel = s => document.querySelector(s);
 const selAll = s => Array.from(document.querySelectorAll(s)); //converting from node list to regular javascript array;
+const ace = window.ace;
 
 const out = sel("#output");
 const preview = sel("#preview");
@@ -30,7 +31,11 @@ function log(msg, type="info") {
 const clearOut = () => { out.innerHTML="";}
 sel("#clearLog")?.addEventListener("click",clearOut);
 
-ace.config.set("basePath","https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/ace.js");
+ace.config.set('basePath',  './vendor/ace/');
+ace.config.set('modePath',  './vendor/ace/');
+ace.config.set('themePath', './vendor/ace/');
+ace.config.set('workerPath','./vendor/ace/');
+
 function makeEditor (id , mode) {
     const ed = ace.edit(id , {
         theme : "ace/theme/dracula",
@@ -165,10 +170,7 @@ sel("#runWeb")?.addEventListener('click', ()=> runWeb() );
 sel("#runTests")?.addEventListener('click',()=> runWeb(true) );
 sel("#openPreview")?.addEventListener('click',()=> {
     const src = buildWebSrcDoc();
-    const w = window.open("about:blank");
-    w.document.open();
-    w.document.write(src);
-    w.document.close();
+    window.electronAPI.openPreview(src);  
 });
 
 
@@ -247,3 +249,11 @@ try {
 }
 
 log("Welcome to web code your editor for web technologies");
+
+window.electronAPI.onSave(() => {
+  sel("#saveBtn").click();
+});
+
+window.electronAPI.onLoad(() => {
+  sel("#loadBtn").click();
+});
