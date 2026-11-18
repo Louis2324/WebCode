@@ -62,6 +62,7 @@ node --check preload.js
 node --check menu.js
 node --check dist/script.js
 npm test
+npm run perf:baseline -- --check
 ```
 
 To build a local installer, use `npm run package`. Builds are written to `release/`, which is ignored by Git.

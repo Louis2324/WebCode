@@ -6,3 +6,6 @@ contact_links:
   - name: Documentation
     url: https://github.com/Louis2324/WebCode#readme
     about: Read the project documentation before opening a support issue.
+  - name: Support policy
+    url: https://github.com/Louis2324/WebCode/blob/main/SUPPORT.md
+    about: Check supported versions and supported workflows.
