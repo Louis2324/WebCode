@@ -98,6 +98,18 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request. Use `feat
 
 Please follow the [Code of Conduct](CODE_OF_CONDUCT.md). Security vulnerabilities should be reported privately according to [SECURITY.md](SECURITY.md).
 
+## Project documentation
+
+- [Product scope and stable-release contract](docs/PRODUCT_SCOPE.md)
+- [Release and manual QA checklist](docs/RELEASE_CHECKLIST.md)
+- [Known limitations](docs/KNOWN_LIMITATIONS.md)
+- [Performance baseline](docs/PERFORMANCE.md)
+- [Privacy and diagnostics](PRIVACY.md)
+- [Support policy](SUPPORT.md)
+- [Issue triage](docs/ISSUE_TRIAGE.md)
+
+The architecture roadmap and user-feedback process are intentionally being discussed separately before they are documented as project policy.
+
 ## License
 
 WebCode is released under the [ISC License](LICENSE).
