@@ -17,9 +17,12 @@ WebCode is an offline-first Electron desktop editor for learning and building sm
 - Offline use after installation, except for user-requested external links and network requests made by user-authored preview code.
 - Automated installers for Windows, macOS, and Linux on x64 and ARM64 where the release matrix provides an artifact.
 
-## Explicitly out of scope for 1.0
+## Current workspace direction
 
-- Multi-file workspaces and a project explorer.
+The feature branch extends the original three-editor model into a versioned multi-file workspace. The workspace keeps project files in the `.webcode.json` container, uses a configurable HTML entry file, and embeds linked CSS, JavaScript, and SVG content into the sandboxed preview. Legacy version 1 files are migrated on load.
+
+## Explicitly out of scope for the current release line
+
 - Integrated terminal, Git client, debugger, language servers, or package manager.
 - Extensions or third-party plugins.
 - Cloud sync, accounts, collaboration, or remote storage.
@@ -34,7 +37,7 @@ WebCode is an offline-first Electron desktop editor for learning and building sm
 | macOS | x64 and Apple Silicon; macOS 12 Monterey+ | Release target; smoke-test one Intel and one Apple Silicon environment when available |
 | Linux | x64 and ARM64 AppImage/deb | Ubuntu 22.04 LTS+ is the reference environment; other distributions are best effort |
 
-The minimum macOS version follows the current Electron 38 dependency. If the Electron major version changes, this support statement must be reviewed before the next stable release.
+The minimum macOS version follows the current Electron 45 dependency. If the Electron major version changes, this support statement must be reviewed before the next stable release.
 
 ## Stable-release definition
 

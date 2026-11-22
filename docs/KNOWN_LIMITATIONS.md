@@ -2,7 +2,8 @@
 
 These limitations are intentional or not yet addressed in the current release line. They should be reviewed before each stable release.
 
-- WebCode currently models one web project as three editor contents. It does not yet provide a multi-file workspace or project explorer.
+- Workspace files are currently stored inside a `.webcode.json` document; they are not synchronized to a live directory on disk.
+- Binary assets are not imported into the workspace yet. SVG files are supported as text assets and embedded into previews.
 - There is no integrated terminal, Git workflow, debugger, language server, package manager, or extension API.
 - Projects are saved locally as `.webcode.json` files. There is no cloud backup, synchronization, or collaboration service.
 - Recovery drafts are local to the application profile and are not a substitute for saving a project file.

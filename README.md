@@ -13,12 +13,17 @@ WebCode is under active development. The repository has automated validation and
 
 ## Features
 
-- HTML, CSS, and JavaScript editors powered by Ace.
+- Multi-file workspace with an explorer, file tabs, and configurable preview entry file.
+- HTML, CSS, JavaScript, JSON, Markdown, and SVG editors powered by Ace.
 - Sandboxed live preview.
-- Simple JavaScript validation tests.
-- Local project save and load as JSON.
+- Linked CSS and JavaScript files are embedded into the sandboxed preview.
+- SVG workspace assets can be referenced from HTML and are embedded into preview output.
+- JavaScript validation tests with individual pass/fail results.
+- Local project save and load as versioned JSON, including legacy project migration.
 - `Ctrl+Enter` / `Cmd+Enter` to run code.
 - `Ctrl+S` / `Cmd+S` to save a project.
+- Workspace search/replace, formatting, command palette, recent projects, and recovery snapshots.
+- Responsive, mobile, tablet, and desktop preview presets.
 - Desktop preview window.
 - Offline desktop assets; no runtime CDN dependency.
 - Windows NSIS installer, macOS DMG, Linux AppImage, and Linux `.deb` build targets.

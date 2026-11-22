@@ -11,97 +11,125 @@
   <header>
     <div class="container row">
       <div class="brand">
-        <div class="logo"></div>
-        <div class="title">WebCode: Your in-browser web-development kit</div>
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div class="title">WebCode</div>
+          <div class="subtitle">A focused offline web workspace</div>
+        </div>
       </div>
       <div class="status" id="status" role="status" aria-live="polite">Starting...</div>
-      <div class="row">
-        <button class="btn secondary" id="newBtn" title="Create a new project">
-          <span>New</span>
-        </button>
-        <button class="btn secondary" id="saveBtn" title="Save Work Locally">
-          <span>Save</span>
-        </button>
-        <button class="btn secondary" id="loadBtn" title="Load Work File">
-          <span>Load</span>
-        </button>
-        <input id="openFile" type="file" accept="application/json" hidden>
+      <div class="row header-actions">
+        <button class="btn secondary" id="newBtn" title="Create a new project">New</button>
+        <button class="btn secondary" id="loadBtn" title="Open a WebCode project">Open</button>
+        <button class="btn primary" id="saveBtn" title="Save project">Save</button>
+        <button class="btn secondary" id="recentBtn" title="Open a recent project">Recent</button>
+        <button class="btn secondary icon-btn" id="commandBtn" title="Open command palette">⌘</button>
+        <input id="openFile" type="file" accept=".json,.webcode.json,application/json" hidden>
       </div>
     </div>
   </header>
 
   <main>
-    <aside class="card panel stack" id="assignmentPanel">
-      <h2>Task / Assignment</h2>
-      <textarea id="assignment" class="text" placeholder="Task Description..."></textarea>
-      <div class="stack">
-        <label for="testArea">Validation Tests (JavaScript Only)</label>
-      <textarea class="text" id="testArea" placeholder="Example: assert(document.querySelector('h1'), 'Add a heading')"></textarea>
+    <aside class="card panel stack explorer-panel" aria-label="Project explorer">
+      <div class="row panel-heading">
+        <div>
+          <h2>Workspace</h2>
+          <div class="muted" id="projectLabel">Untitled project</div>
+        </div>
+        <button class="btn secondary small" id="newFileBtn" title="Create a file">＋ File</button>
       </div>
-      <div class="muted">
-        Tip: <span class="kbd">Ctrl</span> + <span class="kbd">S</span> to save,
-        <span class="kbd">Ctrl</span> + <span class="kbd">Enter</span> to run
+      <div class="explorer-toolbar row">
+        <button class="btn ghost small" id="newFolderFileBtn">＋ Folder file</button>
+        <button class="btn ghost small" id="setEntryBtn">Set entry</button>
       </div>
+      <div id="fileTree" class="file-tree" role="tree" aria-label="Project files"></div>
+      <div class="explorer-help muted">Double-click a file to rename it. The entry file is used for preview.</div>
     </aside>
 
-    <section class="stack" id="web-only">
-      <div class="stack panel card" id="webEditors">
-        <div class="row">
-          <h2>HTML/CSS/JS</h2>
-          <div class="row">
+    <section class="stack workspace-panel" aria-label="Editor and preview">
+      <div class="stack panel card" id="editorCard">
+        <div class="row editor-toolbar">
+          <div class="file-location">
+            <span class="muted">Editing</span>
+            <strong id="activeFileLabel">index.html</strong>
+          </div>
+          <div class="row toolbar-actions">
+            <button class="btn secondary small" id="searchBtn">Search</button>
+            <button class="btn secondary small" id="formatBtn">Format</button>
             <button class="btn ok" id="runWeb" aria-label="Run code in preview">Run</button>
-            <button class="btn secondary" id="openPreview" aria-label="Open preview in new window">
-              Open Preview
-            </button>
+            <button class="btn secondary" id="openPreview" aria-label="Open preview in new window">Open Preview</button>
           </div>
         </div>
-
-        <div class="tabs" id="webTabs" role="tablist" aria-label="Web Editors">
-          <button class="tab active" role="tab" aria-selected="true" aria-controls="pane-html" id="tab-html" tabindex="0" data-pane="html">HTML</button>
-          <button class="tab" role="tab" aria-selected="false" aria-controls="pane-css" id="tab-css" tabindex="-1" data-pane="css">CSS</button>
-          <button class="tab" role="tab" aria-selected="false" aria-controls="pane-js" id="tab-js" tabindex="-1" data-pane="js">JS</button>
+        <div class="file-tabs" id="fileTabs" role="tablist" aria-label="Open files"></div>
+        <div class="editor-wrap" id="editorWrap">
+          <div id="editor" class="editor" aria-label="Source editor"></div>
         </div>
-
-        <div class="editor-wrap" id="pane-html" role="tabpanel" aria-labelledby="tab-html" data-pane="html">
-          <div id="ed_html" class="editor"></div>
+        <div class="row preview-toolbar">
+          <div class="row">
+            <h2>Preview</h2>
+            <span class="muted" id="previewState">Ready</span>
+          </div>
+          <div class="row">
+            <label class="toggle"><input id="autoRun" type="checkbox"> Auto-run</label>
+            <label class="select-label" for="viewport">Viewport</label>
+            <select id="viewport" class="select">
+              <option value="responsive">Responsive</option>
+              <option value="mobile">Mobile · 375px</option>
+              <option value="tablet">Tablet · 768px</option>
+              <option value="desktop">Desktop · 1200px</option>
+            </select>
+          </div>
         </div>
-        <div class="editor-wrap" id="pane-css" role="tabpanel" aria-labelledby="tab-css" data-pane="css" hidden>
-          <div id="ed_css" class="editor"></div>
-        </div>
-        <div class="editor-wrap" id="pane-js" role="tabpanel" aria-labelledby="tab-js" data-pane="js" hidden>
-          <div id="ed_js" class="editor"></div>
-        </div>
-
-        <div class="stack">
-          <h3>Preview</h3>
+        <div class="preview-frame-wrap" id="previewFrameWrap">
           <iframe id="preview" sandbox="allow-scripts allow-modals" aria-label="Live preview"></iframe>
         </div>
       </div>
     </section>
 
-    <aside class="card panel stack" id="outputPanel">
-      <h2>Output</h2>
-      <div id="output" class="out" role="log" aria-live="polite" aria-label="WebCode output"></div>
-      <div class="row">
-        <button class="btn warn" id="runTests" aria-label="Run tests">Run With Tests</button>
-        <button class="btn secondary" id="clearLog" aria-label="Clear output log">Clear Log</button>
-      </div>
-      <h3>Notes</h3>
-      <ul class="muted">
-        <li>Everything runs inside the browser</li>
-        <li>You can save your work as JSON</li>
-      </ul>
+    <aside class="card panel stack insights-panel" aria-label="Project details and output">
+      <section class="stack">
+        <div class="row"><h2>Project brief</h2><span class="muted">Saved with project</span></div>
+        <textarea id="assignment" class="text" placeholder="Describe the task or idea..."></textarea>
+      </section>
+      <section class="stack tests-section">
+        <div class="row"><h2>Validation</h2><button class="btn warn small" id="runTests">Run tests</button></div>
+        <textarea class="text compact" id="testArea" placeholder="Example: test('heading', () => assert(document.querySelector('h1')))" spellcheck="false"></textarea>
+        <div id="testResults" class="test-results" aria-live="polite"><span class="muted">No test run yet.</span></div>
+      </section>
+      <section class="stack output-section">
+        <div class="row"><h2>Output</h2><button class="btn ghost small" id="clearLog">Clear</button></div>
+        <div id="output" class="out" role="log" aria-live="polite" aria-label="WebCode output"></div>
+      </section>
+      <div class="muted shortcut-help"><span class="kbd">Ctrl/Cmd</span> + <span class="kbd">S</span> save · <span class="kbd">Enter</span> run · <span class="kbd">Shift</span> + <span class="kbd">P</span> commands</div>
     </aside>
   </main>
 
-  <footer class="footer">
-    &copy; 2025 
-    <a href="https://github.com/Louis2324" target="_blank" rel="noopener noreferrer">
-      Louis2324
-    </a> 
-    - All Rights Reserved
-  </footer>
+  <dialog id="searchDialog" class="dialog">
+    <form method="dialog" class="dialog-card" id="searchForm">
+      <div class="row"><h2>Search workspace</h2><button class="close-btn" value="cancel" aria-label="Close">×</button></div>
+      <input class="text" id="searchQuery" placeholder="Search across files" autocomplete="off">
+      <div class="row search-replace-row"><input class="text" id="replaceQuery" placeholder="Replace with"><button class="btn secondary" id="replaceAllBtn" type="button">Replace all</button></div>
+      <div id="searchResults" class="search-results muted">Type to search across the workspace.</div>
+    </form>
+  </dialog>
+
+  <dialog id="commandDialog" class="dialog">
+    <form method="dialog" class="dialog-card command-card" id="commandForm">
+      <div class="row"><h2>Command palette</h2><button class="close-btn" value="cancel" aria-label="Close">×</button></div>
+      <input class="text" id="commandQuery" placeholder="Type a command..." autocomplete="off">
+      <div id="commandList" class="command-list"></div>
+    </form>
+  </dialog>
+
+  <dialog id="recentDialog" class="dialog">
+    <form method="dialog" class="dialog-card">
+      <div class="row"><h2>Recent projects</h2><button class="close-btn" value="cancel" aria-label="Close">×</button></div>
+      <div id="recentList" class="recent-list"></div>
+    </form>
+  </dialog>
+
+  <footer class="footer">WebCode · Offline-first web building</footer>
   <script src="./vendor/ace/ace.js"></script>
-  <script type = "module" src="./script.js"></script>
+  <script type="module" src="./script.js"></script>
 </body>
 </html>

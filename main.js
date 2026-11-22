@@ -71,6 +71,16 @@ function createPreviewWindow(html) {
   previewWindow.loadURL(`data:text/html;charset=utf-8,${encodeURIComponent(html)}`);
 }
 
+async function readProjectFile(filePath) {
+  const resolvedPath = path.resolve(filePath);
+  if (!resolvedPath.toLowerCase().endsWith(".webcode.json")) {
+    throw new Error("Recent project paths must point to a .webcode.json file");
+  }
+  const project = JSON.parse(await fs.readFile(resolvedPath, "utf8"));
+  if (!isProject(project)) throw new Error("Selected file is not a valid WebCode project");
+  return { canceled: false, filePath: resolvedPath, project };
+}
+
 ipcMain.handle("project-save", async (event, project) => {
   if (!isProject(project)) throw new Error("Invalid WebCode project");
 
@@ -100,10 +110,14 @@ ipcMain.handle("project-load", async (event) => {
   if (result.canceled || result.filePaths.length === 0) return { canceled: true };
 
   const filePath = result.filePaths[0];
-  const project = JSON.parse(await fs.readFile(filePath, "utf8"));
-  if (!isProject(project)) throw new Error("Selected file is not a valid WebCode project");
+  return readProjectFile(filePath);
+});
 
-  return { canceled: false, filePath, project };
+ipcMain.handle("project-load-path", async (_event, filePath) => {
+  if (typeof filePath !== "string" || filePath.length > 4096) {
+    throw new Error("Invalid recent project path");
+  }
+  return readProjectFile(filePath);
 });
 
 ipcMain.handle("open-preview", (event, html) => {

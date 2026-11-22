@@ -12,5 +12,6 @@ contextBridge.exposeInMainWorld("electronAPI", {
   onLoad: (callback) => subscribe("menu-load", callback),
   saveProject: (project) => ipcRenderer.invoke("project-save", project),
   loadProject: () => ipcRenderer.invoke("project-load"),
+  loadRecentProject: (filePath) => ipcRenderer.invoke("project-load-path", filePath),
   openPreview: (html) => ipcRenderer.invoke("open-preview", html),
 });

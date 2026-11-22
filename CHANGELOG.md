@@ -9,6 +9,13 @@ All notable WebCode changes are documented here. Release candidates are marked e
 - Complete the stable-release QA cycle.
 - Discuss the workspace architecture and feedback process before documenting them as policy.
 
+### Added on feature branch
+
+- Version 2 workspace projects with migration from the original three-editor format.
+- Multi-file explorer, file tabs, file operations, configurable entry file, and recovery snapshots.
+- Linked CSS/JavaScript and SVG asset embedding in the sandboxed preview.
+- Search/replace, formatting, command palette, recent projects, preview presets, and test result reporting.
+
 ## [1.0.2-rc.3] - 2026-11-18
 
 ### Added
