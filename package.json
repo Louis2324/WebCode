@@ -30,7 +30,7 @@
         "ace-builds": "^1.45.2"
     },
     "devDependencies": {
-        "electron": "^45.3.4",
+        "electron": "^45.4.1",
         "electron-builder": "^26.18.0",
         "nodemon": "^3.1.14"
     },
